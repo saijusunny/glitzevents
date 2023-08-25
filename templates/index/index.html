@@ -1,0 +1,417 @@
+{% extends 'index/index_base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Rajdhani -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200&family=Poppins:ital,wght@0,200;1,600&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+
+<!-- now font style -->
+
+<style>
+    p{
+        font-family: Now Regular;
+    }
+    #banner{
+        background-image: url("{% static 'home/homebanner.png'%}");
+        height: 818px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        
+    }
+    h2{
+        color: #000;
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    #contactus{
+   
+        height: 605px;
+      
+    }
+    #contactus p{
+        color: #000;
+        text-align: center;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0.8px;
+        font-family: Now Regular;
+    }
+
+    @media (max-width:992px) {
+      #contactus p{
+        text-align: justify;
+      }
+    }
+    #ourservice{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    }
+    @media (max-width:992px) {
+      #ourservice{
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+
+    #events{
+        padding-left: 5rem;
+        padding-right: 5rem;
+        height: 537px;
+        flex-shrink: 0;
+        background: url('static/home/eventsbg.png'), #622E92 0px -226.074px / 100% 186.684% no-repeat;
+    }
+    @media (max-width:992px) {
+      #events{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: 1600px;
+      }
+    }
+    #our_work{
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+    @media (max-width:992px) {
+      #our_work{
+        padding-left: 1rem;
+        padding-right: 1rem;
+       
+      }
+    }
+    #user_events{
+        background: linear-gradient(92deg, #622E92 0%, #7E7ECD 53.45%, #622E92 100%);
+        height: 901px;
+        flex-shrink: 0;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+    @media (max-width:992px) {
+      #user_events{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: 3000px;
+      }
+    }
+    #footer{
+        
+    background: url('static/home/eventsbg.png'), rgba(98, 46, 146, 0.75) 0px -226.074px / 100% 186.684% no-repeat;
+    height: 1015px;
+    flex-shrink: 0;
+
+
+    }
+</style>
+<div class="container-fluid">
+
+
+
+    <div class="row">
+        <div class="col-sm-12" id="banner">
+
+        </div>
+    </div>
+
+
+    <div>
+        <div class="row" id="contactus" style="text-align: center;padding-top: 10rem;background-color: #00B5AA0D;">
+            <div class="col-sm-12" >
+                <h2>ABOUT US</h2>
+            </div>
+            <div class="col-sm-8 p-3" style="margin: 0 auto;">
+                <p>Glitz the best event planners in Kerala. We makes your dream events come true by proper planning and management.We are specialized in food catering and event management service including stage decoration,LED wall screen stage,bridal makeup,welcome girls,car decoration,security guards,DJ & live Musics,camera & videos,panthal works.We provide the best catering and event management service in varied customized options more than the dreams and expectations of our clients</p>
+            </div>
+            <div class="col-sm-12">
+                <button class="pt-2 pb-2 pl-5 pr-5" style="background-color:#622E92; border: none; color: white;font-size: 20px;font-style: normal;font-weight: 500;line-height: 30px;letter-spacing: 1px;">CONTACT US</button>
+            </div>
+        </div>
+    </div>
+    
+
+
+    <div id="ourservice">
+        <div class="row" style="margin-top: 10rem;">
+            <div class="col-sm-12">
+                <h2 style="text-align: center;">OUR SIRVICE</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr style="height: 1px;">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-4" >
+                <div class="row mt-3">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\makeup.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                <div class="row" style="background-color: #622E92; margin-right:.5px; margin-left: .5px;height: 100px;">
+                    <div class="col-sm-12" style="text-align: center;">
+                        <p style="color: #FFF;font-size: 24px;font-style: normal;font-weight: 500;line-height: normal; margin-top: 2.5rem;" class="title">BRIDAL MAKEUP</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\welcome.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                
+                <div class="row" style="background-color: #622E92; margin-right:1px; margin-left: 1px;height: 100px;">
+                    <div class="col-sm-12" style="text-align: center;">
+                        <p style="color: #FFF;font-size: 24px;font-style: normal;font-weight: 500;line-height: normal; margin-top: 2.5rem;" class="title">BRIDAL MAKEUP</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mt-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\led.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                
+                <div class="row" style="background-color: #622E92; margin-right:.5px; margin-left: .5px;height: 100px;">
+                    <div class="col-sm-12" style="text-align: center;">
+                        <p style="color: #FFF;font-size: 24px;font-style: normal;font-weight: 500;line-height: normal; margin-top: 2.5rem;" class="title">BRIDAL MAKEUP</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div >
+        <div class="row" id="events" style="margin-top:10rem;">
+            <div class="col-sm-12">
+
+                <div class="row mt-5">
+                    <div class="col-sm-12">
+                        <h2 style="color: white; text-align: center;">EVENT EXPERTISE</h2>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-sm-3 p-4" >
+                        <div class="row">
+                            <div class="col-sm-12" style="background-color: rgba(0, 0, 0, 0.20); height: 277px; margin: 0 auto;">
+                                <div class="row">
+                                    <div class="col-sm-12 pl-4 pt-4">
+                                        <img src="{%static 'home\service-1-1.png'%}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <h2 style="color: #FFF;font-size: 32px;font-style: normal;font-weight: 600;line-height: normal;">Wedding</h2>
+                                     
+                                        <p style="color: #FFF;font-size: 16px;font-style: normal;font-weight: 300;line-height: normal;letter-spacing: 0.48px;">We meet with the clients and get their full objective as to what exactly they want on their big day</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-4" >
+                        <div class="row">
+                            <div class="col-sm-12" style="background-color: rgba(0, 0, 0, 0.20); height: 277px; margin: 0 auto;">
+                                <div class="row">
+                                    <div class="col-sm-12 pl-4 pt-4">
+                                        <img src="{%static 'home\service-2-1.png'%}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <h2 style="color: #FFF;font-size: 32px;font-style: normal;font-weight: 600;line-height: normal;">Birthday</h2>
+                                     
+                                        <p style="color: #FFF;font-size: 16px;font-style: normal;font-weight: 300;line-height: normal;letter-spacing: 0.48px;">Our team of professionals will analyze your requirements and provide birthday ideas to suit your needs and budget..</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-4" >
+                        <div class="row">
+                            <div class="col-sm-12" style="background-color: rgba(0, 0, 0, 0.20); height: 277px; margin: 0 auto;">
+                                <div class="row">
+                                    <div class="col-sm-12 pl-4 pt-4">
+                                        <img src="{%static 'home\service-3-1.png'%}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <h2 style="color: #FFF;font-size: 32px;font-style: normal;font-weight: 600;line-height: normal;">Corporate events</h2>
+                                     
+                                        <p style="color: #FFF;font-size: 16px;font-style: normal;font-weight: 300;line-height: normal;letter-spacing: 0.48px;">Our team is committed to providing efficient, highly entertaining quality shows for corporate too.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 p-4" >
+                        <div class="row">
+                            <div class="col-sm-12" style="background-color: rgba(0, 0, 0, 0.20); height: 277px; margin: 0 auto;">
+                                <div class="row">
+                                    <div class="col-sm-12 pl-4 pt-4">
+                                        <img src="{%static 'home\service-4-1.png'%}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <h2 style="color: #FFF;font-size: 32px;font-style: normal;font-weight: 600;line-height: normal;">DJ Party</h2>
+                                     
+                                        <p style="color: #FFF;font-size: 16px;font-style: normal;font-weight: 300;line-height: normal;letter-spacing: 0.48px;">We can make a party is always wonderful for your special people to come together</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="our_work">
+        <div class="row" style="margin-top: 10rem;">
+            <div class="col-sm-12">
+                <h2 style="text-align: center;">OUR WORKS</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <hr style="height: 1px;">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-4" >
+                <div class="row mt-3">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\work1.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-sm-4 mt-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\work2.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="col-sm-4 mt-3">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <img src="{%static 'home\work3.png'%}" class="w-100" alt="">
+
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <div >
+
+        <div class="row" id="user_events" style="margin-top: 10rem; padding-top: 10rem;">
+            <div class="col-sm-3 ">
+                <div class="row mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row   mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 ">
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3 " >
+                <div class="row  mt-2">
+                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="footer">
+        <div class="col-sm-12">
+
+            <div class="row" style="margin-top: 6rem;">
+                <div class="col-sm-8" style="margin: 0 auto;text-align: center;" >
+                    <img src="{% static 'home\footerlogo.png'%}" class="w-50" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+{% endblock %}
