@@ -62,7 +62,7 @@
               <a href="{% url 'forgotPassword' %}" style="text-align: right;color: #4e4e4e;"><p style="font-size: 14px;color: #858585">Forgot Password?</p></a>
               <button type="submit" class="form-control btn btn-dark login  mt-4" style="background-color: #042454;">Login</button>
 
-              <a href="{% url 'user_registration' %}"  style="text-align: center; " ><p class=""><span style="color: #858585;">Don't have an account? </span><span style="font-weight: bold; ">Sign Up</span></p></a>
+              <a href="{% url 'forgotPassword' %}"  style="text-align: center; " ><p class=""><span style="color: #858585;">Don't have an account? </span><span style="font-weight: bold; ">Sign Up</span></p></a>
             </div>
           </div>
     
@@ -311,7 +311,7 @@ body {
         <p><a href="{% url 'forgotPassword' %}">Forgotten account ?</a></p>
         <hr />
         <p style="text-align: center;">
-          Don't have an account?<a href="{% url 'user_registration' %}">Click here</a>
+          Don't have an account?<a href="">Click here</a>
         </p>
         <button type="button" class="btn -box-sd-effect"><img src="{% static 'images/icons/google.png' %}">  Continue with google</button>
         <button type="button" class="btn -box-sd-effect"> <img src="{% static 'images/icons/apple.png' %}"> Continue with apple</button>

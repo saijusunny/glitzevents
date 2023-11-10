@@ -15,4 +15,5 @@ urlpatterns = [
 
     path('user_profile',views.user_profile,name='user_profile'),
     path('edit_user_profile/<int:id>',views.edit_user_profile,name='edit_user_profile'), 
+    path('User_Registration',views.User_Registration,name='User_Registration'),
     ]
