@@ -237,3 +237,43 @@ def edit_user_profile(request,id):
         
         return redirect ("user_profile")
     return redirect ("user_profile")
+
+def user_registrations(request):
+    if request.method=="POST":
+        
+        emails=request.POST.get('email',None)
+        usernames=request.POST.get('username',None)
+        passwords=request.POST.get('password',None)
+        cn_passs=request.POST.get('cn_pass',None)
+       
+
+        if passwords == cn_passs:
+            if User_Registration.objects.filter(username=usernames).exists():
+                messages.error(request,'User already registered')
+                return render (request, 'user/user_signup.html')
+            else:
+                if User_Registration.objects.filter(email=emails).exists():
+                    messages.error(request,'Email already registered')
+                    return render (request, 'user/user_signup.html')
+                else:
+                    usrs=User_Registration()
+                    name = request.POST.get('fullname',None)
+                    phone_number = request.POST.get('phno',None)
+                    email = request.POST.get('email',None)
+                    role ="user1"
+                    if request.FILES.get('prop',None)==None:
+                        image='static\images\logo\icon.png'
+                    else:
+                        pro_pic =request.FILES.get('prop',None)
+                    
+                    username = request.POST.get('username',None)
+                    password = request.POST.get('password',None)
+                    status = "active"
+                    addres =request.POST.get('address',None)
+                    joindate = date.today()
+                    usrs.save()
+                    return redirect('login_main')
+        messages.error(request,"Password And Confirm Password are Not same")
+        return render (request, 'user/user_signup.html')
+
+    return render(request, "user/user_signup.html")

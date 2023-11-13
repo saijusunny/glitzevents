@@ -1,0 +1,117 @@
+{% extends 'index/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+   body{
+      background: url("{% static 'home/eventsbg.png'%}"), #622E92 0px -226.074px / 100% 186.684% no-repeat; 
+
+      font-family: 'Poppins', sans-serif;;
+    }
+    a{
+      text-decoration: none;
+      color: black;
+    }
+    a:hover{
+      text-decoration: none;
+      color: black;
+    }
+    #lg{
+      text-align: center; 
+      padding-top: 10rem;
+      background: url("{% static 'home/eventsbg.png'%}"), #622E92 0px -226.074px / 100% 186.684% no-repeat; 
+      border-radius: 20px;
+      height: 680px;
+    }
+    @media (max-width:992px) {
+      #lg{
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        height: 200px;
+      }
+      
+    }
+    
+    #forms{
+      padding-top: 1.8rem;
+      padding-bottom: 1.8rem;
+    }
+    @media (max-width:992px) {
+      #forms{
+   
+      padding-top: 20px;
+    }
+      
+    }
+   
+  
+</style>
+<div class="container" >
+    
+      
+    </div>
+
+      
+      
+      <div class="row m-3" >
+        <div class="col-sm-8" style="margin: 2% auto; width: 100%; height: auto;background-color: white;;border-radius: 20px;  border: 2px solid #969696; height: auto;" >
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="div"></div>
+              {% if messages %}
+                  <div class="alert alert-danger">
+                      <ul>
+                          {% for message in messages %}
+                              <li>{{ message }}</li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                {% endif %}
+            
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6" id="lg">
+                <img src="{% static 'home/footerlogo.png'%}" alt="" class="w-75" >
+              </div> 
+            <div class="col-sm-6" id="forms">
+              
+              <div class="row">
+                <div class="col-sm-12 mt-1" style="text-align: center;">
+                  <h4 class="text-dark">Sign Up</h4>
+                </div>
+              </div>
+    
+              <div class="row pl-3 pr-3">
+                <div class="col-sm-12">
+                  
+                    <form class="form" action="{% url 'user_registrations'%}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" class="form-control" placeholder="Name" name="fullname"><br>
+                        
+                        <input type="text" class="form-control" placeholder="Email" name="email"><br>
+                        <input type="text" class="form-control" placeholder="Phone Number"  name="phno"><br>
+                        <textarea name="" id="" class="form-control" placeholder="Address" name="address"></textarea><br>
+                        <input type="file" name="prop" id="" class="form-control"><br>
+                        <input type="text" class="form-control" placeholder="Username"  name="username"><br>
+                        <input type="text" class="form-control" placeholder="Password"  name="password"><br>
+                        <input type="text" class="form-control" placeholder="Confirm Password"  name="cn_pass"><br>
+                        <input type="submit" class="form-control btn btn-dark login  mt-4" style="background-color:#622E92;" value="Submit">
+                        
+
+                    </form>
+                </div>
+              </div>  
+            </div>
+               
+          </div>
+          
+    
+        </div>
+      </div>
+  
+  </div>
+
+
+  {% endblock %}

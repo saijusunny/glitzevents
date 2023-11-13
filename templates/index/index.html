@@ -113,7 +113,7 @@
     }
 
     #foot{
-        height: 621.501px;
+        height: 550px;
         flex-shrink: 0;
         background-image: url('static/home/footbg3.png');
         background-repeat: no-repeat;
@@ -142,17 +142,63 @@
       #foot_social{
         padding-left: 3rem;
         padding-top: 2rem;
+        
       }
     }
     #foot_cont{
         margin: 10rem auto;
     }
+    @media (max-width:992px) {
+    #foot_cont{
+        margin: 2rem auto;
+        text-align: center;
+    }
+    }
 
     #foot_gst{
         margin: 10rem auto;
-        color: #000;
+     
         font-weight: bold;
+        border-left-style: solid;
+        border-left-color: #622E92;
+        border-left-width: 7px;
+        font-size: 18px;
+        padding-left: 50px;
     }
+    @media (max-width:992px) {
+      #foot_gst{
+        border-left-style: none;
+        border-top-style: solid;
+        border-top-color: #622E92;
+        border-top-width: 7px;
+        margin: 1rem auto;
+      }
+      #cnt_num{
+        padding-top: 20px;
+        
+      }
+      #foot_gst{
+        margin: 2rem auto;
+        text-align: center;
+      }
+      
+    }
+    #copyright{
+        height: 80px;
+        padding-top: 2rem;
+    }
+    #copyright a{
+        text-decoration: underline;
+        color: white;
+    }
+    @media (max-width:992px) {
+    #copyright{
+        height: 100px;
+        padding-top: 1rem;
+        
+        }
+    }
+
 </style>
 <div class="container-fluid">
 
@@ -491,37 +537,44 @@
                 <div class="col-sm-8">
 
                     <div class="row">
-                        <div class="col-sm-6"  id="foot_cont">
+                        <div class="col-sm-4">
+
+                        </div>
+                        
+                        <div class="col-sm-4"  id="foot_cont">
                             <div class="row">
                                 <div class="col-sm-1">
                                     <img src="{% static 'home\phone.png'%}" alt="" style="width: 48px;height: 48px;">
+
                                 </div>
-                                <div class="col-sm-11 pl-4">
-                                    <p style="text-align: left;font-family: Rajdhani;font-size: 20px;font-style: normal;font-weight: 600;line-height: normal;">+91 83300 08090</p>
-                                    <p style="text-align: left;font-family: Rajdhani;font-size: 20px;font-style: normal;font-weight: 600;line-height: normal;">+91 94468 73737</p>
+                                <div class="col-sm-11 pl-5" style="margin-left: -10px;" id="cnt_num">
+                                    <p style="font-family: Rajdhani;font-size: 20px;font-style: normal;font-weight: 600;line-height: normal;">+91 83300 08090</p>
+                                    <p style="font-family: Rajdhani;font-size: 20px;font-style: normal;font-weight: 600;line-height: normal;">+91 94468 73737</p>
+
                                 </div>
+                            
                             </div><br>
                             <div class="row">
                                 <div class="col-sm-1">
                                     <img src="{% static 'home\mail.png'%}"  alt="" style="width: 48px;height: 48px;">
                                 </div>
-                                <div class="col-sm-11 pl-5" style="margin-left: -20px; margin-top: 10px;">
+                                <div class="col-sm-11 pl-5" style="margin-left: -10px; margin-top: 10px;">
                                     
                               
-                                    <p style="text-align: left;font-family: Rajdhani;font-size: 20px;font-style: normal;font-weight: 600;line-height: normal;">glitzeventskollam@gmail.com</p>
+                                    <p style="font-family: Rajdhani;font-size: 18px;font-style: normal;font-weight: 600;line-height: normal;">glitzeventskollam@gmail.com</p>
                                   
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-sm-6 " id="foot_gst">
+                        <div class="col-sm-4" id="foot_gst">
                             <div class="row">
-                                <div class="col-sm12">
+                                <div class="col-sm-12">
                                     Fssai : 00000000000000
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm12">
+                                <div class="col-sm-12">
                                     GSTIN : 0000000000000000
                                 </div>
                             </div>
@@ -529,10 +582,15 @@
                     </div>
                 </div>
             </div>
+            <div class="row " style="background-color: #622E92;" id="copyright">
+                <div class="col-sm-12" style=" text-align: center; color: white;">
+                    <p>Copyright 2023 All rights reserved by <Span style="font-weight: bolder;">Glits Events Planners</Span> | Crafted in Gods Own Country With <span style="font-weight: bold;"><a href="">Qninfo Technologies</a></span></p>
+                </div>
+            </div>
         </div>
+
+        
     </div>
-
-
-
+    
 </div>
 {% endblock %}

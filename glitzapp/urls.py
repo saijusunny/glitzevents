@@ -10,10 +10,11 @@ urlpatterns = [
     path('resetpassword_validate/<uidb64>/<token>/', views.resetpassword_validate,name='resetpassword_validate'),
     path('resetPassword/', views.resetPassword,name='resetPassword'),
     path('logout/', views.logout,name='logout'),
+    path('user_registrations/', views.user_registrations,name='user_registrations'),
     
     ############################################################ <<<<<<<<< User MODULE >>>>>>>>>>>>>>>>>
 
     path('user_profile',views.user_profile,name='user_profile'),
     path('edit_user_profile/<int:id>',views.edit_user_profile,name='edit_user_profile'), 
-    path('User_Registration',views.User_Registration,name='User_Registration'),
+
     ]
