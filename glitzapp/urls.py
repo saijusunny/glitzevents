@@ -13,8 +13,9 @@ urlpatterns = [
     path('user_registrations/', views.user_registrations,name='user_registrations'),
     
     ############################################################ <<<<<<<<< User MODULE >>>>>>>>>>>>>>>>>
-
+    path('home',views.home,name='home'),
     path('user_profile',views.user_profile,name='user_profile'),
-    path('edit_user_profile/<int:id>',views.edit_user_profile,name='edit_user_profile'), 
+    path('edit_user_profile/<int:id>',views.edit_user_profile,name='edit_user_profile'),
+    path('all_events_view',views.all_events_view,name="all_events_view"),
 
     ]

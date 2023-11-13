@@ -41,34 +41,20 @@ def login_main(request):
         password = request.POST['password']
         print(username)
         user = authenticate(username=username, password=password)
+           
+                
+        if User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user1", status="active").exists():
+            member = User_Registration.objects.get(username=request.POST['username'],password=request.POST['password'])
+            request.session['userid'] = member.id
+            return redirect('home')
         
-        try:
-            if User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user1").exists():
 
-                member = User_Registration.objects.get(username=request.POST['username'],password=request.POST['password'])
-                
-                request.session['userid'] = member.id
-                if Profile_User.objects.filter(user_id=member.id).exists():
-                    return redirect('staff_home')
-                else:
-                    return redirect('profile_staff_creation')
-                
-                
-            elif User_Registration.objects.filter(username=request.POST['username'], password=request.POST['password'],role="user2", status="active").exists():
-                member = User_Registration.objects.get(username=request.POST['username'],password=request.POST['password'])
-                request.session['userid'] = member.id
-                if Profile_User.objects.filter(user_id=member.id).exists():
-                    return redirect('home')
-                else:
-                    return redirect('profile_user_creation')
-
-            elif user.is_superuser:
-                    request.session['userid'] = request.user.id
-                    return redirect('admin_home')
-            else:
-                messages.error(request, 'Invalid username or password')
-        except:
+        elif user.is_superuser:
+                request.session['userid'] = request.user.id
+                return redirect('admin_home')
+        else:
             messages.error(request, 'Invalid username or password')
+        
     return render(request,'index/login.html')
 
 def forgotPassword(request):
@@ -143,36 +129,68 @@ def logout(request):
 
 
 ########################################################## <<<<<<<<<< USER MODULE >>>>>>>>>>>>>>>>
+def user_registrations(request):
+    if request.method=="POST":
+        
+        emails=request.POST.get('email',None)
+        usernames=request.POST.get('username',None)
+        passwords=request.POST.get('password',None)
+        cn_passs=request.POST.get('cn_pass',None)
+       
+
+        if passwords == cn_passs:
+            if User_Registration.objects.filter(username=usernames).exists():
+                messages.error(request,'Username already registered')
+                return render (request, 'user/user_signup.html')
+            else:
+                if User_Registration.objects.filter(email=emails).exists():
+                    messages.error(request,'Email already registered')
+                    return render (request, 'user/user_signup.html')
+                else:
+                    usrs=User_Registration()
+                    usrs.name = request.POST.get('fullname',None)
+                    usrs.phone_number = request.POST.get('phno',None)
+                    usrs.email = request.POST.get('email',None)
+                    usrs.role ="user1"
+                    if request.FILES.get('prop',None)==None:
+                        usrs.pro_pic='static\images\logo\icon.png'
+                    else:
+                        usrs.pro_pic =request.FILES.get('prop',None)
+                    
+                    usrs.username = request.POST.get('username',None)
+                    usrs.password = request.POST.get('password',None)
+                    usrs.status = "active"
+                    usrs.addres =request.POST.get('address',None)
+                    usrs.joindate = date.today()
+                    usrs.save()
+                    return redirect('login_main')
+        messages.error(request,"Password And Confirm Password are Not same")
+        return render (request, 'user/user_signup.html')
+
+    return render(request, "user/user_signup.html")
+
 
 def base_sub(request):
     ids=request.session['userid']
-    usr=Profile_User.objects.get(user=ids)
-    lk=category.objects.get(id=1)
-    crt_cnt=cart.objects.filter(user=ids).count()
+    usr=User_Registration.objects.get(user=ids)
+    
  
     context={
         'user':usr,
-        "lk":lk,
-        "crt_cnt":2
     }
     return render(request, 'user/base_sub.html',context)
 
-def user_base(request):
+
+def home(request):
     ids=request.session['userid']
-    usr=Profile_User.objects.get(user=ids)
-    lk=category.objects.get(id=1)
-    crt_cnt=cart.objects.filter(user=ids).count()
- 
+    usr=User_Registration.objects.get(id=ids)
     context={
         'user':usr,
-        "lk":lk,
-        "crt_cnt":crt_cnt
     }
-    return render(request, 'user/user_base.html',context)
+    return render(request, 'user/home.html',context)
 
-   
 
-  
+
 def user_profile(request):
     if request.session.has_key('userid'):
         pass
@@ -238,42 +256,9 @@ def edit_user_profile(request,id):
         return redirect ("user_profile")
     return redirect ("user_profile")
 
-def user_registrations(request):
-    if request.method=="POST":
-        
-        emails=request.POST.get('email',None)
-        usernames=request.POST.get('username',None)
-        passwords=request.POST.get('password',None)
-        cn_passs=request.POST.get('cn_pass',None)
-       
 
-        if passwords == cn_passs:
-            if User_Registration.objects.filter(username=usernames).exists():
-                messages.error(request,'User already registered')
-                return render (request, 'user/user_signup.html')
-            else:
-                if User_Registration.objects.filter(email=emails).exists():
-                    messages.error(request,'Email already registered')
-                    return render (request, 'user/user_signup.html')
-                else:
-                    usrs=User_Registration()
-                    name = request.POST.get('fullname',None)
-                    phone_number = request.POST.get('phno',None)
-                    email = request.POST.get('email',None)
-                    role ="user1"
-                    if request.FILES.get('prop',None)==None:
-                        image='static\images\logo\icon.png'
-                    else:
-                        pro_pic =request.FILES.get('prop',None)
-                    
-                    username = request.POST.get('username',None)
-                    password = request.POST.get('password',None)
-                    status = "active"
-                    addres =request.POST.get('address',None)
-                    joindate = date.today()
-                    usrs.save()
-                    return redirect('login_main')
-        messages.error(request,"Password And Confirm Password are Not same")
-        return render (request, 'user/user_signup.html')
+def all_events_view(request):
+    return render(request,'user/all_events.view.html')
 
-    return render(request, "user/user_signup.html")
+
+

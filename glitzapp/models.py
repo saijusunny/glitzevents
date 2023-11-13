@@ -20,7 +20,7 @@ class User_Registration(models.Model):
     status =models.CharField(max_length = 255,blank=True,null=True, default="active")
     addres =  models.TextField(blank=True,null=True)
     joindate = models.DateField(null=True)
-    
+    last_login = models.DateTimeField(null=True, blank=True)    
     def str(self):
         return self.nickname
     
