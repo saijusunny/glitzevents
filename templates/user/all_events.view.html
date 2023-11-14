@@ -14,4 +14,52 @@
         <a href="{% url 'create_event'%}"><div class="btn mr-2" style=" border: none; color: white; background-color: #622E92;"> Add An Event</div></a>
     </div>  
 </div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+
+        <div class="row pl-4 pr-4">
+                {% for i in events%}
+                <div class="col-sm-3 p-4">
+                    <div class="row" style="height: 15rem;">
+                        <div class="col-sm-12 bg-light" style="background-image: url('{{i.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                        dsffds
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                {% for i in events%}
+                <div class="col-sm-3 p-4">
+                    <div class="row" style="height: 15rem;">
+                        <div class="col-sm-12 bg-light" style="background-image: url('{{i.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                     
+                            <p><a href="#" class="twitter"><i class="fab fa-twitter bg-danger text-light w-100"></i></a></p>
+                            <p><a href="#" class="facebook"><i class="fab fa-facebook bg-danger text-light w-100"></i></a></p>
+                            <p><a href="#" class="instagram"><i class="fab fa-instagram bg-danger text-light w-100"></i></a></p>
+                            <p><a href="#" class="google-plus"><i class="fab fa-skype bg-danger text-light w-100"></i></i></a></p>
+                            <p><a href="#" class="linkedin"><i class="fab fa-linkedin bg-danger text-light w-100"></i></a>
+                    
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+                {% for i in events%}
+                <div class="col-sm-3 p-4">
+                    <div class="row" style="height: 15rem;">
+                        <div class="col-sm-12 bg-light" style="background-image: url('{{i.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                        dsffds
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+                
+                
+        </div>
+
+
+    </div>
+</div>
 {% endblock %}

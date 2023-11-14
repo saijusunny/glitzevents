@@ -265,8 +265,10 @@ def all_events_view(request):
 
     ids=request.session['userid']
     usr=User_Registration.objects.get(id=ids)
+    events=events_table.objects.all().order_by("-posting_date")
     context={
         'user':usr,
+        'events':events,
     }
     return render(request,'user/all_events.view.html',context)
 
@@ -310,7 +312,7 @@ def create_event(request):
             mappeds2=list(mappeds2)
             for ele in mappeds2:
             
-                created = event_empeded_link.objects.get_or_create(image=ele[0], user=usr, events=evn)
+                created = event_images.objects.get_or_create(image=ele[0], user=usr, events=evn)
         else: 
             pass
 
@@ -323,7 +325,7 @@ def create_event(request):
             mappeds2=list(mappeds2)
             for ele in mappeds2:
             
-                created = event_empeded_link.objects.get_or_create(social_media=ele[0],link=ele[1], user=usr, events=evn)
+                created = event_social.objects.get_or_create(social_media=ele[0],link=ele[1], user=usr, events=evn)
         else: 
             pass
         return redirect('all_events_view')

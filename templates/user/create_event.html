@@ -17,8 +17,8 @@
 <!-- now font style -->
 <div class="row" style="margin-top: 8rem;" >
     <div class="col-sm-6 p-5" style="text-align: center;margin: 0 auto;" id="main">
-        <form action="">
-
+        <form action="{% url 'create_event'%}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row mt-5">
                 <div class="col-sm-12" >
                     <h5 style="color: white;"><b>Create Event</b></h5>
@@ -126,6 +126,13 @@
             <div class="row mt-2">
                 <div class="col-sm-12">
                     <textarea name="description" id="" class="form-control" placeholder="Add description..."></textarea>
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <div class="col-sm-12">
+                    <input type="submit" value="Create" class="btn btn-light">
                 </div>
             </div>
         </form>
