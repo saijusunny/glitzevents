@@ -18,5 +18,7 @@ urlpatterns = [
     path('edit_user_profile/<int:id>',views.edit_user_profile,name='edit_user_profile'),
     path('all_events_view',views.all_events_view,name="all_events_view"),
     path('create_event',views.create_event,name="create_event"),
+    path('view_all_event/<int:id>',views.view_all_event,name="view_all_event"),
+    
 
     ]

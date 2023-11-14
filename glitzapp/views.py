@@ -331,3 +331,17 @@ def create_event(request):
         return redirect('all_events_view')
 
     return render (request, 'user/create_event.html',context)
+
+def view_all_event(request,id):
+    evn=events_table.objects.get(id=id)
+    lnk=event_empeded_link.objects.filter(events=id)
+    img=event_images.objects.filter(events=id)
+    scl=event_social.objects.filter(events=id)
+    context={
+        'evn':evn,
+        'lnk':lnk,
+        'img':img,
+        'scl':scl
+
+    }
+    return render(request,'user/view_all_event.html', context)
