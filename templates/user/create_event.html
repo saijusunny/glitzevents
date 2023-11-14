@@ -1,0 +1,204 @@
+{% extends 'user/base_user.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Rajdhani -->
+
+
+<style>
+    #main{
+        
+      background: url('static/home/eventsbg.png'), #622E92 0px -226.074px / 100% 186.684% no-repeat; 
+
+      font-family: 'Poppins', sans-serif;;
+    }
+
+</style>
+<!-- now font style -->
+<div class="row" style="margin-top: 8rem;" >
+    <div class="col-sm-6 p-5" style="text-align: center;margin: 0 auto;" id="main">
+        <form action="">
+
+            <div class="row mt-5">
+                <div class="col-sm-12" >
+                    <h5 style="color: white;"><b>Create Event</b></h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 mt-5">
+                    <input type="text" class="form-control" name="title" id="" placeholder="Title">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12" style="text-align: left;">
+                    <label for="" class="ml-3 mt-2 text-light">Add Cover Photo :</label>
+                </div>
+            </div>
+
+            <div class="row">
+         
+                <div class="col-sm-12 ">
+                    <input type="file" class="form-control" name="cover_photo" id="" placeholder="Cover Photo">
+                </div>
+               
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12" style="text-align: left;">
+                    <label for="" class="ml-3 mt-2 text-light">Add Youtube Empeded Link :</label>
+                </div>
+            </div>
+            <div class="row">
+        
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" name='empeded_link[]' id="" placeholder="Add You Tube Empeded Link">
+                </div>
+                
+            </div>
+
+            <div id="empeded_lnk">
+
+            </div>
+            <div class="row">
+                <div class="col-sm-1 mt-1">
+                    <div class="btn btn-light" title="Add You Tube Empeded Link" id="empeded_btn">+</div>
+                </div>
+
+            </div>
+            
+
+
+            <div class="row">
+                <div class="col-sm-12" style="text-align: left;">
+                    <label for="" class="ml-3 mt-2 text-light">Add Images :</label>
+                </div>
+            </div>
+
+            <div class="row">
+         
+                <div class="col-sm-12 ">
+                    <input type="file" class="form-control" name='images[]' id="" placeholder="Title">
+                </div>
+                
+            </div>
+
+            <div id="images">
+
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-sm-1">
+                    <div class="btn btn-light" title="Add Images" id="add_images">+</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12" style="text-align: left;">
+                    <label for="" class="ml-3 mt-2 text-light">Add Social Media Link :</label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-sm-3">
+                    <select name='media[]' id="" class="form-control">
+                        <option value="">Facebook</option>
+                        <option value="">Instagram</option>
+                        <option value="">Linkedin</option>
+                        <option value="">Twitter</option>
+                    </select>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name='link[]' id="" placeholder="Link">
+                </div>
+                
+            </div>
+            <div id="links_div">
+
+            </div>
+            <div class="row mt-1">
+                <div class="col-sm-1">
+                    <div class="btn btn-light" title="Add Social Media" id="social_link">+</div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <textarea name="description" id="" class="form-control" placeholder="Add description..."></textarea>
+                </div>
+            </div>
+        </form>
+    </div>  
+</div>
+
+<script>
+$(document).ready(function(){
+    
+    $('#empeded_btn').click(function(){
+    
+        $('#empeded_lnk').append(
+            `
+            <div class="row pt-1">
+            <div class="col-sm-12">
+                <input type="text" class="form-control" name='empeded_link[]' id="" placeholder="Add You Tube Empeded Link">
+            </div>
+            
+            </div>
+                                            
+            `
+        );
+    });
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    
+    $('#add_images').click(function(){
+    
+        $('#images').append(
+            `
+            <div class="row pt-1">
+            <div class="col-sm-12">
+                <input type="file" class="form-control" name='images[]' id="" placeholder="Add images">
+            </div>
+            
+            </div>
+                                            
+            `
+        );
+    });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    
+    $('#social_link').click(function(){
+    
+        $('#links_div').append(
+            `
+            <div class="row pt-1">
+
+            <div class="col-sm-3">
+                <select name='media[]' id="" class="form-control">
+                    <option value="">Facebook</option>
+                    <option value="">Instagram</option>
+                    <option value="">Linkedin</option>
+                    <option value="">Twitter</option>
+                </select>
+            </div>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name='link[]' id="" placeholder="Link">
+            </div>
+            
+            </div>
+                                            
+            `
+        );
+    });
+});
+</script>
+{% endblock %}

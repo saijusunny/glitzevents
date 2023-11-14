@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.hashers import make_password
 # User Registration Section
-
+from datetime import datetime,date, timedelta
 role = (
     ("user1", "Staff"),
     ("user2", "User"),
@@ -27,4 +27,26 @@ class User_Registration(models.Model):
     def get_email_field_name(self):
         return 'email'
 
+class events_table(models.Model):
+    user = models.ForeignKey(User_Registration, on_delete=models.SET_NULL, null=True, blank=True)
+    event_title = models.CharField(max_length=255, blank=False, null=False)
+    posting_date = models.DateField(default=date.today())
+    cover_image = models.ImageField(upload_to='images/cover', default='static/images/logo/icon.png')
+    description=models.TextField(blank=True, null=True)
 
+class event_empeded_link(models.Model):
+    user = models.ForeignKey(User_Registration, on_delete=models.SET_NULL, null=True, blank=True)
+    events = models.ForeignKey(events_table, on_delete=models.SET_NULL, null=True, blank=True)
+    empeded_link = models.TextField(blank=True, null=True)
+
+
+class event_images(models.Model):
+    user = models.ForeignKey(User_Registration, on_delete=models.SET_NULL, null=True, blank=True)
+    events = models.ForeignKey(events_table, on_delete=models.SET_NULL, null=True, blank=True)
+    image = models.ImageField(upload_to='images/album', default='static/images/logo/icon.png')
+
+class event_social(models.Model):
+    user = models.ForeignKey(User_Registration, on_delete=models.SET_NULL, null=True, blank=True)
+    events = models.ForeignKey(events_table, on_delete=models.SET_NULL, null=True, blank=True)
+    social_media = models.CharField(max_length=255, blank=False, null=False)
+    link = models.TextField(blank=True, null=True)

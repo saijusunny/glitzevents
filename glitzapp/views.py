@@ -258,7 +258,74 @@ def edit_user_profile(request,id):
 
 
 def all_events_view(request):
-    return render(request,'user/all_events.view.html')
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
 
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    context={
+        'user':usr,
+    }
+    return render(request,'user/all_events.view.html',context)
 
+def create_event(request):
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
 
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    context={
+        'user':usr,
+    }
+
+    if request.method == "POST":
+        evn=events_table()
+        evn.user=usr
+        evn.event_title=request.POST.get('title', None)
+        evn.cover_image=request.FILES.get('cover_photo', None)
+        evn.description=request.POST.get('description', None)
+        evn.save()
+
+        #empeded link
+
+        empeded = request.POST.getlist('empeded_link[]')
+        if empeded:
+            mappeds = zip(empeded)
+            mappeds=list(mappeds)
+            for ele in mappeds:
+            
+                created = event_empeded_link.objects.get_or_create(empeded_link=ele[0], user=usr, events=evn)
+        else: 
+            pass
+
+        #images
+
+        img = request.FILES.getlist('images[]')
+        if img:
+            mappeds2 = zip(img)
+            mappeds2=list(mappeds2)
+            for ele in mappeds2:
+            
+                created = event_empeded_link.objects.get_or_create(image=ele[0], user=usr, events=evn)
+        else: 
+            pass
+
+        #Social Media
+
+        md = request.POST.getlist('media[]')
+        links = request.POST.getlist('link[]')
+        if len(md)==len(links):
+            mappeds2 = zip(md,links)
+            mappeds2=list(mappeds2)
+            for ele in mappeds2:
+            
+                created = event_empeded_link.objects.get_or_create(social_media=ele[0],link=ele[1], user=usr, events=evn)
+        else: 
+            pass
+        return redirect('all_events_view')
+
+    return render (request, 'user/create_event.html',context)

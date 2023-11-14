@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glitz Events Planners</title>
+    <link rel="shortcut icon" href="{% static 'images\logo\glitzeventicon.png'%}" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
+   <style>
+    .navbar{
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: #622E92;
+      z-index: 1;
+      padding-left: 5rem;
+      padding-right: 5rem;
+    }
+    .navbar-nav{
+      margin-left: 0;
+      font-size: 20px;
+    
+    }
+    li{
+      font-size: 16px;
+      color: black;
+      font-weight: 500;
+    }
+    
+    @media (max-width:992px) {
+      .navbar{
+        background-color: #622E92;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    body{
+      background-color: #E6E6FA;
+    }
+    
+    
+   </style>
+</head>
+<body>
+ 
+  <div class="">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" href="#"><img src="{% static 'images\logo\glitzlogo.png'%}" alt=""></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"  style="color: white;">HOME <span class="sr-only">(current)</span></a>
+          </li>
+          
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          
+
+          <div>
+            <div class="dropdown" >
+                {% if user.pro_pic %}
+                <img class="rounded-circle article-img dropdown-toggle bg-dark" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{user.pro_pic.url}}" id="img" width="50" height="50">
+                  
+                {%else%}
+                <img class="rounded-circle article-img dropdown-toggle" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{% static 'images\logo\icon.png'%}" id="img" width="50" height="50">
+                {%endif%}
+                
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="float: left;background-image: linear-gradient(-45deg,#ffffff, #ffffff);width: 50px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+                    <a class="dropdown-item text-dark" href="{%url 'user_profile'%}"><i class="fa-regular fa-user mr-2"></i>Profile</a>
+                    <a class="dropdown-item  text-dark" href="{%url 'logout'%}"> <i class="mdi mdi-logout text-dark mr-2"></i>Log out</a>
+  
+                </div>
+               
+            </div>
+        </form>
+      </div>
+    </nav>
+    
+    {% block content %}
+    
+
+    {% endblock %}
+  </div>
+</body>
+</html>
