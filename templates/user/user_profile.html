@@ -1,0 +1,174 @@
+{% extends 'user/base_user.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body{
+        background-color: #f2f2f2;
+    }
+    
+</style>
+<div class="container bg-light mb-4" style="margin-top: 8rem;">
+    <div class="row">
+        <div class="col-sm-12" style="margin: 0 auto;text-align: center;">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-12 pt-5">
+        {% if user.pro_pic%}
+        
+            <div style="width: 330px; height:330px;background-image:  url({{user.pro_pic.url}});  background-position: center; background-size: cover; background-repeat: no-repeat; margin: 0 auto; border-radius: 20px; box-shadow: 5px 10px 18px #fcdcd4;">
+            
+
+            </div>
+        {%else%}
+            <div style="width: 330px; height:330px;background-image:  url('static/images/logo/icon.png');  background-position: center; background-size: cover; background-repeat: no-repeat; margin: 0 auto; border-radius: 20px; box-shadow: 5px 10px 18px #fcdcd4;"></div>
+   
+      
+        {%endif%}
+        </div>
+        
+        
+        <div class="col-md-8 col-sm-12 pt-5">
+            <div class="row">
+                <div class="col-sm-12" style="text-align: right;">
+                    <a href=" " class="btn btn-danger mr-5" data-toggle="modal" data-target="#dis" >
+                        <i class="fas fa-pencil-alt"></i> Edit
+                    
+                    </a>
+                </div>
+            </div>
+            <div class=" information">
+                <h4>Personal Information &nbsp;</h4> 
+                <br>
+                <label for="gender">Name:</label>
+                <input class="form-control mt-2" type="text" name="" id="" placeholder="{{user.name}} {{pro.lastname}}" style="border: none;cursor: none;" disabled>
+            </div>
+            <br>
+                           
+            <div class="email">
+                <label for="date_of_birth">Email:</label>
+                <input class="form-control" type="text" placeholder="{{user.email}}" style="border: none;cursor: none;" disabled>
+            </div>
+            <br>
+            <div class="mobile">
+                <label for="date_of_birth">Phone Number:</label>
+                <input class="form-control" type="text" placeholder="{{user.phone_number}}r" style="border: none;cursor: none;" disabled>
+            </div>
+            <br>
+     
+            <div class="address_info">
+                <label for="date_of_birth">Address :</label>
+                <textarea name="" id="" class="form-control" style="border: none;cursor: none;" disabled>{{user.addres}}</textarea>
+                
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- ================ -->
+
+  <form method="post" action="{% url 'edit_user_profile' user.id%}" enctype="multipart/form-data">
+
+    <div class="rowmt-5 modal fade" id="dis">
+      <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-content modal-xl" style="background-color: #191c24;">
+          <div class="card ">
+            <div class="card-body">
+              <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+                style="background-color: #191c24;border:none;float: right;font-size: 20px;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              
+              <div class="container mt-2" style=" padding: 50px;">
+                  <h2 class="text-center text-uppercase" style="font-family:bold; font-size:34px;">Edit Profile</h2>
+                  <hr>
+                  <div class="row">
+                      <div class="col-md-12">
+                          
+                              {% csrf_token %}
+                              
+                              
+                              <div class="form-group">
+                                  <label for="name">Name:</label>
+                                  <input type="text" id="name" name="name" value="{{user.name}}" required class="form-control">
+                              </div>
+                             
+                              <div class="form-group">
+                                  <label for="phone_number">Phone Number:</label>
+                                  <input type="text" id="phone_number" name="phone_number" required class="form-control " value="{{user.phone_number}}">
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label for="email">Email:</label>
+                                  <input type="email" id="email" name="email" required class="form-control " value="{{user.email}}">
+                              </div>
+                              <div class="form-group">
+                                <label for="profile_pic">Image</label>
+                                <input type="file" id="pro_pic" name="image" class="form-control " value="{{user.pro_pic}}">
+                            </div>
+
+                              
+                              <div class="form-group">
+                                  <label for="username">Username:</label>
+                                  <input type="text" id="username" name="username" required class="form-control " value="{{user.username}}">
+                                  <p class="text-danger" onclick="shows()">you want to change password?</p>
+                              </div>
+                              <div class="form-group" style="display: none;" id="pas">
+                                  <label for="password">Password:</label>
+                                  <input type="text" id="password" name="password" class="form-control " >                                  
+                              </div>
+                              <div class="form-group" style="display: none;" id="cnpass" >
+                                <label for="confirm_password">Confirm Password:</label>
+                                <input type="text" id="con_password" name="con_password"  class="form-control ">                                  
+                              </div>
+                              <div class="form-group">
+                                <label for="phone_number">Address:</label>
+                                <textarea name="address" id="" class="form-control">{{user.addres}}</textarea>
+                           
+                              </div>
+                              
+                              
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12 d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-danger">Submit</button>
+                        </div>
+                    </div>
+                  </div>
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  
+
+<script>
+    function shows(){
+        document.getElementById('pas').style.display="block";
+        document.getElementById('cnpass').style.display="block";
+    }
+</script>
+  
+
+
+{% endblock %}
+
+
+
+

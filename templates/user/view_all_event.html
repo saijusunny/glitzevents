@@ -1,5 +1,5 @@
 {% extends 'user/base_user.html' %}
-{% load embed_video_tags %}
+
 {% load static %}
 
 {% block content %}
@@ -10,7 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200&family=Poppins:ital,wght@0,200;1,600&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
 
 <style>
+body{
+      background: url("{% static 'home/eventsbg.png'%}"), #622E92 0px -226.074px / 100% 186.684% no-repeat fixed; 
 
+      font-family: 'Poppins', sans-serif;;
+    }
 #cover_image{
     height: 35rem;
 }
@@ -20,19 +24,42 @@ h2{
 </style>
 
 <!-- now font style -->
-<div class="row" style="margin-top: 8rem;" id="cover_image">
-    <div class="col-sm-12"  style="background-image: url('{{evn.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat; text-align: center;">
-            <h2 style="color: white; font-size: 48px; font-weight: bold;">{{evn.event_title}}</h2>
+<div class="row " style="margin-top: 8rem;" id="cover_image">
+    <div class="col-sm-12 "  style="background-image: url('{{evn.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat; text-align:center;">
+        <div class="col-sm-2 ml-auto" style="background-color: rgba(0, 0, 0, 0.5); ">
+        {% if post.pro_pic %}
+        <img class="rounded-circle article-img dropdown-toggle bg-dark" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{post.pro_pic.url}}" id="img" width="40" height="40"><span id="nm" class="text-light ml-2">{{post.name}}</span>
+        
+        {%else%}
+        <img class="rounded-circle article-img dropdown-toggle" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{% static 'images\logo\icon.png'%}" id="img" width="40" height="40"><span id="nm" class="text-light">{{post.name}}</span>
+        {%endif%}
+        <br>
+        <p style="color: white;" class="ml-5">{{evn.posting_date}}</p>
+        </div>
+        
+        
     </div>  
 </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>Images</h3>
+<div class="row mt-5">
+    <div class="col-sm-12 p-3" style="background-color: white;color: black; text-align: center;">
+        <h3 style="font-weight: bold;">{{evn.event_title}}</h3>
     </div>
 </div>
 
-<div class="row mt-3">
+<div class="row">
+    <div class="col-sm-8 mt-4" style="margin: 0 auto;">
+        <p style="text-align: center; color: white;">{{evn.description}}</p>
+    </div>
+</div>
+
+<div class="row p-3 mt-5" style="background-color: white;color: black; text-align: center;">
+    <div class="col-sm-12">
+        <h3 style="font-weight: bold;">Images</h3>
+    </div>
+</div>
+
+<div class="row mt-3 p-5">
     {%for l in img %}
     <div class="col-sm-3" style="background-image: url('{{l.image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
                         
@@ -46,25 +73,22 @@ h2{
     
 </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <h3>Images</h3>
+<div class="row mt-5">
+    <div class="col-sm-12 p-3" style="background-color: white;color: black; text-align: center;">
+        <h3 style="font-weight: bold;">YouTube Video</h3>
     </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mt-3 pt-5">
     {%for l in lnk %}
-    <div class="col-sm-3" style="background-image: url('{{l.image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+    <div class="col-sm-4" style="background-image: url('{{l.image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
                         
-        <div  class="col-md-8 offset-md-2">
-            <h1>{{ Tut.tutorial_Title }}</h1>
-            <p>{{ Tut.tutorial_Body | linebreaks }}</p>
-            <h3>Here is the video:</h3>
+        <div  class="col-md-12 offset-md-2">
     
-            {% video l.empeded_link  'tiny' %}
-    
+            <iframe width="370" height="315" src="{{l.empeded_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
         </div>
-   
+        
        
             
     </div>

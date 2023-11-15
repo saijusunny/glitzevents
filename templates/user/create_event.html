@@ -27,7 +27,7 @@
 
             <div class="row">
                 <div class="col-sm-12 mt-5">
-                    <input type="text" class="form-control" name="title" id="" placeholder="Title">
+                    <input type="text" class="form-control" name="title" id="" placeholder="Title" required>
                 </div>
             </div>
 
@@ -40,7 +40,7 @@
             <div class="row">
          
                 <div class="col-sm-12 ">
-                    <input type="file" class="form-control" name="cover_photo" id="" placeholder="Cover Photo">
+                    <input type="file" class="form-control" name="cover_photo" id="" placeholder="Cover Photo"  required>
                 </div>
                
             </div>
@@ -53,7 +53,8 @@
             <div class="row">
         
                 <div class="col-sm-12">
-                    <input type="text" class="form-control" name='empeded_link[]' id="" placeholder="Add You Tube Empeded Link">
+                    <textarea name='empeded_link[]' id="" class="form-control" placeholder="Add You Tube Empeded Link"  required></textarea>
+                 
                 </div>
                 
             </div>
@@ -79,7 +80,7 @@
             <div class="row">
          
                 <div class="col-sm-12 ">
-                    <input type="file" class="form-control" name='images[]' id="" placeholder="Title">
+                    <input type="file" class="form-control" name='images[]' id="" placeholder="Title"  required>
                 </div>
                 
             </div>
@@ -102,15 +103,15 @@
             <div class="row">
 
                 <div class="col-sm-3">
-                    <select name='media[]' id="" class="form-control">
-                        <option value="">Facebook</option>
-                        <option value="">Instagram</option>
-                        <option value="">Linkedin</option>
-                        <option value="">Twitter</option>
+                    <select name='media[]' id="" class="form-control"  required>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Linkedin">Linkedin</option>
+                        <option value="Twitter">Twitter</option>
                     </select>
                 </div>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name='link[]' id="" placeholder="Link">
+                    <textarea name='link[]' id="" class="form-control" placeholder="Link"  required></textarea>
                 </div>
                 
             </div>
@@ -125,7 +126,7 @@
 
             <div class="row mt-2">
                 <div class="col-sm-12">
-                    <textarea name="description" id="" class="form-control" placeholder="Add description..."></textarea>
+                    <textarea name="description" id="" class="form-control" placeholder="Add description..."  required></textarea>
                 </div>
             </div>
 
@@ -148,7 +149,7 @@ $(document).ready(function(){
             `
             <div class="row pt-1">
             <div class="col-sm-12">
-                <input type="text" class="form-control" name='empeded_link[]' id="" placeholder="Add You Tube Empeded Link">
+                <textarea name='empeded_link[]' id="" class="form-control" placeholder="Add You Tube Empeded Link"  required></textarea>
             </div>
             
             </div>
@@ -169,7 +170,7 @@ $(document).ready(function(){
             `
             <div class="row pt-1">
             <div class="col-sm-12">
-                <input type="file" class="form-control" name='images[]' id="" placeholder="Add images">
+                <input type="file" class="form-control" name='images[]' id="" placeholder="Add images"  required>
             </div>
             
             </div>
@@ -190,15 +191,15 @@ $(document).ready(function(){
             <div class="row pt-1">
 
             <div class="col-sm-3">
-                <select name='media[]' id="" class="form-control">
-                    <option value="">Facebook</option>
-                    <option value="">Instagram</option>
-                    <option value="">Linkedin</option>
-                    <option value="">Twitter</option>
+                <select name='media[]' id="" class="form-control"  required>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Linkedin">Linkedin</option>
+                    <option value="Twitter">Twitter</option>
                 </select>
             </div>
             <div class="col-sm-9">
-                <input type="text" class="form-control" name='link[]' id="" placeholder="Link">
+                <textarea name='link[]' id="" class="form-control" placeholder="Link"  required></textarea>
             </div>
             
             </div>

@@ -28,11 +28,16 @@ from datetime import datetime,date, timedelta
 from django.db.models import Q
 from django.template.loader import get_template
 
+
+from bs4 import BeautifulSoup
 ######################################################################### <<<<<<<<<< LANDING MODULE >>>>>>>>>>>>>>
 
 def index(request):
-    
-    return render(request, 'index/index.html')
+    events=events_table.objects.all()
+    context={
+        'events':events
+    }
+    return render(request, 'index/index.html', context)
 
 
 def login_main(request):
@@ -184,8 +189,10 @@ def base_sub(request):
 def home(request):
     ids=request.session['userid']
     usr=User_Registration.objects.get(id=ids)
+    events=events_table.objects.all()
     context={
         'user':usr,
+        'events':events,
     }
     return render(request, 'user/home.html',context)
 
@@ -293,14 +300,30 @@ def create_event(request):
         evn.save()
 
         #empeded link
-
+        emp=[]
         empeded = request.POST.getlist('empeded_link[]')
-        if empeded:
-            mappeds = zip(empeded)
+        for i in empeded:
+           
+            soup = BeautifulSoup(i, 'html.parser')
+
+   
+            iframe_tag = soup.find('iframe')
+            if iframe_tag:
+                src_attribute = iframe_tag.get('src')
+                print(f"Source link: {src_attribute}")
+            else:
+                print("No iframe tag found in the embedded link.")
+            
+            emp.append(src_attribute)
+        print(emp)
+
+
+        if emp:
+            mappeds = zip(emp)
             mappeds=list(mappeds)
             for ele in mappeds:
             
-                created = event_empeded_link.objects.get_or_create(empeded_link=ele[0], user=usr, events=evn)
+                created = event_empeded_link.objects.create(empeded_link=ele[0], user=usr, events=evn)
         else: 
             pass
 
@@ -312,7 +335,7 @@ def create_event(request):
             mappeds2=list(mappeds2)
             for ele in mappeds2:
             
-                created = event_images.objects.get_or_create(image=ele[0], user=usr, events=evn)
+                created = event_images.objects.create(image=ele[0], user=usr, events=evn)
         else: 
             pass
 
@@ -325,7 +348,7 @@ def create_event(request):
             mappeds2=list(mappeds2)
             for ele in mappeds2:
             
-                created = event_social.objects.get_or_create(social_media=ele[0],link=ele[1], user=usr, events=evn)
+                created = event_social.objects.create(social_media=ele[0],link=ele[1], user=usr, events=evn)
         else: 
             pass
         return redirect('all_events_view')
@@ -333,7 +356,15 @@ def create_event(request):
     return render (request, 'user/create_event.html',context)
 
 def view_all_event(request,id):
+
+    try:
+        ids=request.session['userid']
+        usr=User_Registration.objects.get(id=ids)
+    except:
+        usr=None
+    
     evn=events_table.objects.get(id=id)
+    usrss=User_Registration.objects.get(id=evn.user_id)
     lnk=event_empeded_link.objects.filter(events=id)
     img=event_images.objects.filter(events=id)
     scl=event_social.objects.filter(events=id)
@@ -341,7 +372,251 @@ def view_all_event(request,id):
         'evn':evn,
         'lnk':lnk,
         'img':img,
-        'scl':scl
+        'scl':scl,
+        'user':usr,
+        'post':usrss,
 
     }
     return render(request,'user/view_all_event.html', context)
+
+def dashboard(request):
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
+
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    events=events_table.objects.filter(user=usr).order_by("-posting_date")
+    context={
+        'user':usr,
+        'events':events,
+    }
+    return render(request,'user/dashboard.html',context)
+
+def view_self_event(request,id):
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
+
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    evn=events_table.objects.get(id=id)
+    usrss=User_Registration.objects.get(id=evn.user_id)
+    lnk=event_empeded_link.objects.filter(events=id)
+    img=event_images.objects.filter(events=id)
+    scl=event_social.objects.filter(events=id)
+    context={
+        'evn':evn,
+        'lnk':lnk,
+        'img':img,
+        'scl':scl,
+        'user':usr,
+        'post':usrss,
+
+    }
+    return render(request,'user/view_self_event.html', context)
+
+
+def edit_event(request,id):
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    if request.method == "POST":
+        evn=events_table.objects.get(id=id)
+        evn.event_title=request.POST.get('title', None)
+        if request.FILES.get('cover_photo', None)==None:
+            evn.cover_image= evn.cover_image
+        else:
+
+            evn.cover_image=request.FILES.get('cover_photo', None)
+        evn.description=request.POST.get('description', None)
+        evn.save()
+
+        #empeded link
+        emp=[]
+        empeded = request.POST.getlist('empeded_link[]')
+        try:
+            for i in empeded:
+            
+                soup = BeautifulSoup(i, 'html.parser')
+
+    
+                iframe_tag = soup.find('iframe')
+                if iframe_tag:
+                    src_attribute = iframe_tag.get('src')
+                    
+                else:
+                    pass
+                
+                emp.append(src_attribute)
+        
+
+            if emp:
+                mappeds = zip(emp)
+                mappeds=list(mappeds)
+                for ele in mappeds:
+                
+                    created = event_empeded_link.objects.create(empeded_link=ele[0], user=usr, events=evn)
+            else: 
+                pass
+        except:
+            
+            pass
+
+        #images
+        
+        img = request.FILES.getlist('images[]')
+        
+        if img:
+            dt2=event_images.objects.filter(events=id).delete()
+            mappeds2 = zip(img)
+            mappeds2=list(mappeds2)
+            for ele in mappeds2:
+            
+                created = event_images.objects.create(image=ele[0], user=usr, events=evn)
+        else: 
+           pass
+
+        #Social Media
+        
+        md = request.POST.getlist('media[]')
+        links = request.POST.getlist('link[]')
+        if len(md)==len(links):
+            dt3=event_social.objects.filter(events=id).delete()
+            mappeds2 = zip(md,links)
+            mappeds2=list(mappeds2)
+            for ele in mappeds2:
+            
+                created = event_social.objects.create(social_media=ele[0],link=ele[1], user=usr, events=evn)
+        else: 
+            pass
+        return redirect('view_self_event', id)
+
+    return redirect('view_self_event', id)
+
+def user_profile(request):
+    if request.session.has_key('userid'):
+        pass
+    else:
+        return redirect('/')
+    
+
+    ids=request.session['userid']
+    usr=User_Registration.objects.get(id=ids)
+    
+    return render(request, 'user/user_profile.html',{'user':usr})
+
+def edit_user_profile(request,id):
+
+    if request.method == "POST":
+        form = User_Registration.objects.get(id=id)
+        eml=form.email
+        usr_nm=form.username
+        form.name = request.POST.get('name',None)
+        form.phone_number = request.POST.get('phone_number',None)
+        form.email = request.POST.get('email',None)
+        form.addres = request.POST.get('address',None)
+       
+        form.username = request.POST.get('username',None)
+        if request.POST.get('password',None) == "":
+            print("haiii")
+            pass
+        else:
+            print("welcome")
+            
+            if request.POST.get('password',None) == request.POST.get('con_password',None):
+                print("function true")
+                print(request.POST.get('password',None))
+                form.password =request.POST.get('password',None)
+                form.save()
+            else:
+                messages.error(request,"Passwords do not match!")
+                return redirect ("user_profile")
+       
+        if str(request.POST.get('email',None)) == str(eml):
+            if str(request.POST.get('username',None)) == str(usr_nm):
+                form.save()
+            else:
+                if User_Registration.objects.filter(username=form.username).exists():
+                    messages.error(request,"Username already exists.")
+                    return redirect ("user_profile")
+                else:
+                        form.save()
+        else: 
+           
+            if User_Registration.objects.filter(email=form.email).exists():
+                messages.error(request,"Email already exists.")
+                return redirect ("user_profile")
+            else:
+                if str(request.POST.get('username',None)) == str(usr_nm):
+                    form.save()
+                else:
+                    if User_Registration.objects.filter(username=form.username).exists():
+                        messages.error(request,"Username already exists.")
+                        return redirect ("user_profile")
+                    else:
+                        form.save()
+                    
+        if request.POST.get('image') == "":
+            form.pro_pic == form.pro_pic
+
+        else:
+            form.pro_pic = request.FILES.get('image')
+        
+        form.save()
+   
+        
+        return redirect ("user_profile")
+    return redirect ("user_profile")
+
+
+def send_emails(request):
+    if request.method == 'POST':
+       
+        subject = request.POST.get('subject')
+
+        name=request.POST.get('name')
+        number=request.POST.get('number')
+        mail=request.POST.get('mail')
+        event=request.POST.get('event')
+        des=request.POST.get('des')
+
+        message = "Name : "+str(name)+"\n Number : "+str(number)+"\n Mail Id : "+str(mail)+"\n Event : "+str(event)+"\n\n"+str(des)
+
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=mail
+        send_mail(subject,
+        message,
+        email_from,
+        [recipient_list],
+        fail_silently=True)
+
+        return redirect('home')
+    else:
+        return redirect('home')
+
+def send_email_index(request):
+    if request.method == 'POST':
+       
+        subject = request.POST.get('subject')
+
+        name=request.POST.get('name')
+        number=request.POST.get('number')
+        mail=request.POST.get('mail')
+        event=request.POST.get('event')
+        des=request.POST.get('des')
+
+        message = "Name : "+str(name)+"\n Number : "+str(number)+"\n Mail Id : "+str(mail)+"\n Event : "+str(event)+"\n\n"+str(des)
+
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list=mail
+        send_mail(subject,
+        message,
+        email_from,
+        [recipient_list],
+        fail_silently=True)
+
+        return redirect('index')
+    else:
+        return redirect('index')

@@ -1,0 +1,329 @@
+{% extends 'user/base_user.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Rajdhani -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200&family=Poppins:ital,wght@0,200;1,600&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+
+<style>
+body{
+      background: url("{% static 'home/eventsbg.png'%}"), #622E92 0px -226.074px / 100% 186.684% no-repeat fixed; 
+
+      font-family: 'Poppins', sans-serif;;
+    }
+#cover_image{
+    height: 35rem;
+}
+h2{
+    padding-top: 15rem;
+}
+</style>
+
+<!-- now font style -->
+
+<div class="row "style="margin-top: 8rem;">
+<div class="col-sm-12 p-3" style="text-align: right;">
+   
+    <a href="" class="btn btn-success  pr-3 pl-3" data-toggle="modal" data-target="#dis"> Edit</a>
+
+    <div class="btn btn-danger pr-3 pl-3" onclick="return confirm('Are You Sure')"> Delete</div>
+</div>
+</div>
+<div class="row "  id="cover_image">
+    <div class="col-sm-12 "  style="background-image: url('{{evn.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat; text-align:center;">
+        <div class="col-sm-2 ml-auto" style="background-color: rgba(0, 0, 0, 0.5); ">
+        {% if post.pro_pic %}
+        <img class="rounded-circle article-img dropdown-toggle bg-dark" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{post.pro_pic.url}}" id="img" width="40" height="40"><span id="nm" class="text-light ml-2">{{post.name}}</span>
+        
+        {%else%}
+        <img class="rounded-circle article-img dropdown-toggle" id="log" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{% static 'images\logo\icon.png'%}" id="img" width="40" height="40"><span id="nm" class="text-light">{{post.name}}</span>
+        {%endif%}
+        <br>
+        <p style="color: white;" class="ml-5">{{evn.posting_date}}</p>
+        </div>
+        
+        
+    </div>  
+</div>
+
+<div class="row mt-5">
+    <div class="col-sm-12 p-3" style="background-color: white;color: black; text-align: center;">
+        <h3 style="font-weight: bold;">{{evn.event_title}}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8 mt-4" style="margin: 0 auto;">
+        <p style="text-align: center; color: white;">{{evn.description}}</p>
+    </div>
+</div>
+
+<div class="row p-3 mt-5" style="background-color: white;color: black; text-align: center;">
+    <div class="col-sm-12">
+        <h3 style="font-weight: bold;">Images</h3>
+    </div>
+</div>
+
+<div class="row mt-3 p-5">
+    {%for l in img %}
+    <div class="col-sm-3" style="background-image: url('{{l.image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                        
+        <div class="row" id="text_row" style="height: 15rem;">
+            <div class="col-sm-12">
+       
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    
+</div>
+
+<div class="row mt-5">
+    <div class="col-sm-12 p-3" style="background-color: white;color: black; text-align: center;">
+        <h3 style="font-weight: bold;">YouTube Video</h3>
+    </div>
+</div>
+
+<div class="row mt-3 pt-5">
+    {%for l in lnk %}
+    <div class="col-sm-4" style="background-image: url('{{l.image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                        
+        <div  class="col-md-12 offset-md-2">
+    
+            <iframe width="370" height="315" src="{{l.empeded_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+        </div>
+        
+       
+            
+    </div>
+    {%endfor%}
+   
+
+<form action="{% url 'edit_event' evn.id%}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="rowmt-5 modal fade" id="dis">
+      <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-content modal-xl" >
+          <div class="card " style="background: url('{% static 'home/eventsbg.png'%}'), #622E92 0px -226.074px / 100% 186.684% no-repeat; ;">
+            <div class="card-body">
+              <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+                style="background-color: #622E92;border:none;float: right;font-size: 20px;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              
+              
+               
+              
+                            <div class="row mt-5">
+                                <div class="col-sm-12" >
+                                    <h5 style="color: white;"><b>Edit Event</b></h5>
+                                </div>
+                            </div>
+                         
+                            <div class="row">
+                                <div class="col-sm-12 mt-5">
+                                    <label for="" class="ml-3 mt-2 text-light">Title :</label>
+
+                                    <input type="text" class="form-control bg-dark text-light" name="title" id="" placeholder="Title" value="{{evn.event_title}}">
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align: left;">
+                                    <label for="" class="ml-3 mt-2 text-light">Add Cover Photo :</label>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                         
+                                <div class="col-sm-12 ">
+                                    <img src="{{evn.cover_image.url}}" class="w-50" alt="">
+
+                                    <input type="file" class="form-control mt-1  bg-dark text-light" name="cover_photo" id="" placeholder="Cover Photo" value="{{evn.cover_image.url}}">
+                                </div>
+                               
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align: left;">
+                                    <label for="" class="ml-3 mt-2 text-light">Add Youtube Empeded Link :</label>
+                                </div>
+                            </div>
+                            {%for k in lnk%}
+                            <div class="row mb-1">
+                        
+                                <div class="col-sm-12">
+                                    <textarea name='empeded_link[]' value="{{k.empeded_link}}" id="" class="form-control  bg-dark text-light" placeholder="Add You Tube Empeded Link">{{k.empeded_link}}</textarea>
+                                 
+                                </div>
+                                
+                            </div>
+                            {%endfor%}
+                
+                            <div id="empeded_lnk">
+                
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-1 mt-1">
+                                    <div class="btn btn-dark" title="Add You Tube Empeded Link" id="empeded_btn">+</div>
+                                </div>
+                
+                            </div>
+                            
+                
+                
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align: left;">
+                                    <label for="" class="ml-3 mt-2 text-light">Add Images :</label>
+                                </div>
+                            </div>
+                            {%for i in img%}
+                            <div class="row mb-1">
+                         
+                                <div class="col-sm-12 ">
+                                    <img src="{{i.image.url}}" class="w-50" alt="">
+                                    <input type="file" class="form-control mt-1  bg-dark text-light" name='images[]' id="" placeholder="Title" value="{{i.image.url}}">
+                                </div>
+                                
+                            </div>
+                            {%endfor%}
+                
+                            <div id="images">
+                
+                            </div>
+                
+                            <div class="row mt-1">
+                                <div class="col-sm-1">
+                                    <div class="btn btn-dark" title="Add Images" id="add_images">+</div>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-sm-12" style="text-align: left;">
+                                    <label for="" class="ml-3 mt-2 text-light">Add Social Media Link :</label>
+                                </div>
+                            </div>
+
+                            {%for r in scl%}
+                            <div class="row mb-1">
+                
+                                <div class="col-sm-3">
+                                    <select name='media[]' id="" class="form-control bg-dark text-light">
+                                        <option value="{{r.social_media}}" selected>{{r.social_media}}</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Linkedin">Linkedin</option>
+                                        <option value="Twitter">Twitter</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control  bg-dark text-light" name='link[]' id="" placeholder="Link" value="{{r.link}}">
+                                </div>
+                                
+                            </div>
+                            {%endfor%}
+                            <div id="links_div">
+                
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-1">
+                                    <div class="btn btn-dark" title="Add Social Media" id="social_link">+</div>
+                                </div>
+                            </div>
+                
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <textarea name="description" id="" class="form-control  bg-dark text-light" placeholder="Add description..." value="{{evn.description}}">{{evn.description}}</textarea>
+                                </div>
+                            </div>
+                
+                
+                            <div class="row mt-5">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Save" class="btn btn-dark">
+                                </div>
+                            </div>
+                       
+                   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script>
+    $(document).ready(function(){
+        
+        $('#empeded_btn').click(function(){
+        
+            $('#empeded_lnk').append(
+                `
+                <div class="row pt-1">
+                <div class="col-sm-12">
+                    <textarea name='empeded_link[]' id="" class="form-control bg-dark text-light " placeholder="Add You Tube Empeded Link"></textarea>
+                </div>
+                
+                </div>
+                                                
+                `
+            );
+        });
+    });
+    </script>
+    
+    
+    <script>
+    $(document).ready(function(){
+        
+        $('#add_images').click(function(){
+        
+            $('#images').append(
+                `
+                <div class="row pt-1">
+                <div class="col-sm-12">
+                    <input type="file" class="form-control bg-dark text-light" name='images[]' id="" placeholder="Add images">
+                </div>
+                
+                </div>
+                                                
+                `
+            );
+        });
+    });
+    </script>
+    
+    <script>
+    $(document).ready(function(){
+        
+        $('#social_link').click(function(){
+        
+            $('#links_div').append(
+                `
+                <div class="row pt-1">
+    
+                <div class="col-sm-3">
+                    <select name='media[]' id="" class="form-control bg-dark text-light">
+                        <option value="Facebook">Facebook</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Linkedin">Linkedin</option>
+                        <option value="Twitter">Twitter</option>
+                    </select>
+                </div>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control bg-dark text-light" name='link[]' id="" placeholder="Link">
+                </div>
+                
+                </div>
+                                                
+                `
+            );
+        });
+    });
+    </script>
+{% endblock %}

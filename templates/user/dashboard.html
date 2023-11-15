@@ -1,0 +1,78 @@
+{% extends 'user/base_user.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Rajdhani -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato&family=Oswald:wght@200&family=Poppins:ital,wght@0,200;1,600&family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+
+<style>
+
+#text_row{
+    text-align: center;
+    padding-top: 6rem;
+    color: transparent;
+}
+#text_row:hover{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.767);
+    height: 15rem;
+    
+}
+
+</style>
+
+<!-- now font style -->
+<div class="row" style="margin-top: 8rem;">
+    <div class="col-sm-12" style="text-align: right;">
+        <a href="{% url 'create_event'%}"><div class="btn mr-2" style=" border: none; color: white; background-color: #622E92;"> Add An Event</div></a>
+    </div>  
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+
+        <div class="row pl-4 pr-4">
+                {% for i in events%}
+                
+                <div class="col-sm-3 p-4 clickable-row" data-href="{% url 'view_self_event' i.id%}">
+                    <div class="row zoom" style="height: 15rem;" >
+                        <div class="col-sm-12 bg-light thumbnail" style="background-image: url('{{i.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;" >
+                        
+                            <div class="row" id="text_row" >
+                                <div class="col-sm-12">
+                                    <h3>{{i.event_title}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {%endfor%}
+                
+
+                
+                
+        </div>
+
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+<script>
+    // Add click event listener to all rows with class "clickable-row"
+    const rows = document.querySelectorAll('.clickable-row');
+    rows.forEach(row => {
+        row.addEventListener('click', () => {
+            // Get the URL from the "data-href" attribute
+            const url = row.getAttribute('data-href');
+            // Navigate to the URL
+            window.location.href = url;
+        });
+    });
+</script>
+{% endblock %}

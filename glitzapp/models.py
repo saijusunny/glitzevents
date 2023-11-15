@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.hashers import make_password
 # User Registration Section
 from datetime import datetime,date, timedelta
-from  embed_video.fields  import  EmbedVideoField  #pip install django django-embed-video
+  #pip install django django-embed-video
 role = (
     ("user1", "Staff"),
     ("user2", "User"),
@@ -38,7 +38,7 @@ class events_table(models.Model):
 class event_empeded_link(models.Model):
     user = models.ForeignKey(User_Registration, on_delete=models.SET_NULL, null=True, blank=True)
     events = models.ForeignKey(events_table, on_delete=models.SET_NULL, null=True, blank=True)
-    empeded_link = EmbedVideoField()
+    empeded_link = models.TextField(blank=True, null=True)
 
 
 class event_images(models.Model):

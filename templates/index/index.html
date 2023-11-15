@@ -422,71 +422,28 @@
     </div>
 
     <div >
+        <div class="row" style="margin-top: 10rem; text-align: center;">
+            <div class="col-sm-12">
+                <h2>User Reviews</h2>
+                <hr>
+            </div>
+        </div>
+       
 
-        <div class="row" id="user_events" style="margin-top: 10rem; padding-top: 10rem;">
+        <div class="row" id="user_events" style=" padding-top: 4rem; margin-top: 2rem;">
+            
+       
+            {%for i in events%}
+            
+
             <div class="col-sm-3 ">
-                <div class="row mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
+                <div class="col-sm-10 clickable-row" data-href="{% url 'view_all_event' i.id%}" id="img" style=" margin:auto; background-color:  white; height: 300px;background-image: url('{{i.cover_image.url}}'); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                      
                 </div>
 
             </div>
-            <div class="col-sm-3 " >
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 " >
-                <div class="row   mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 ">
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 " >
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 " >
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3 " >
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-sm-3 " >
-                <div class="row  mt-2">
-                    <div class="col-sm-10" style=" margin:auto; background-color:  white; height: 300px;">
-
-                    </div>
-                </div>
-
-            </div>
+            {%endfor%}
+            
         </div>
 
     </div>
@@ -593,4 +550,94 @@
     </div>
     
 </div>
+
+
+<form action="{% url 'send_email_index' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="rowmt-5 modal fade" id="send">
+      <div class="modal-dialog bd-example-modal-xl modal-dialog-centered" role="document" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-content modal-xl" >
+          <div class="card " style="background: url('{% static 'home/eventsbg.png'%}'), #622E92 0px -226.074px / 100% 186.684% no-repeat; ;">
+            <div class="card-body">
+              <button type="button" class="close text-light" data-dismiss="modal" aria-label=""
+                style="background-color: #622E92;border:none;float: right;font-size: 20px;">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              
+              
+               
+              
+                            <div class="row mt-5">
+                                <div class="col-sm-12" >
+                                    <h5 style="color: white;"><b>Send Enquiry Mail</b></h5>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control bg-dark text-light" name="subject" id="" placeholder="subject">
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control bg-dark text-light" name="name" id="" placeholder="Full Name">
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control bg-dark text-light" name="number" id="" placeholder="Mobile Number">
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control bg-dark text-light" name="mail" id="" placeholder="Mail ID" required>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control bg-dark text-light" name="event" id="" placeholder="Event">
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-sm-12">
+                                    <textarea name="des" class="form-control bg-dark text-light"  id=""  placeholder="description"></textarea>
+                                
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div class="col-sm-12">
+                                    <input type="submit" value="Save" class="btn btn-dark">
+                                </div>
+                            </div>
+                         
+                            
+                       
+                   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script>
+      // Add click event listener to all rows with class "clickable-row"
+      const rows = document.querySelectorAll('.clickable-row');
+      rows.forEach(row => {
+          row.addEventListener('click', () => {
+              // Get the URL from the "data-href" attribute
+              const url = row.getAttribute('data-href');
+              // Navigate to the URL
+              window.location.href = url;
+          });
+      });
+  </script>
 {% endblock %}
